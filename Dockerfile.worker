@@ -9,4 +9,4 @@ RUN apt-get update && apt-get install -y build-essential python3-dev gcc musl-de
       && pip install -r requirements/deps.txt --use-feature=2020-resolver \
       && chmod +x /app/celery.sh 
 
-ENTRYPOINT [ "/app/celery.sh" ]
+CMD [ "/app/celery.sh" ]
