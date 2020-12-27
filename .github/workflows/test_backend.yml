@@ -1,0 +1,13 @@
+name: Run Backend Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run:  pip install -r requirements.txt
+    - name: Run Unit Cases
+      run:  python manage.py test
