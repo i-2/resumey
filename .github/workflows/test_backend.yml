@@ -8,6 +8,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
-      run:  pip install -r requirements.txt
+      run:  pip install -r requirements/deps.txt
     - name: Run Unit Cases
       run:  python manage.py test
