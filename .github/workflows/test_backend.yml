@@ -9,10 +9,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Prepare install setuptools
       run:  sudo apt-get install python3-setuptools
-    - name: Prepare install apt deps
-      run:  apt-get install libev-dev python3-setuptools
     - name: Install Dependencies
-      run:  pip3 install -r requirements/deps.txt
+      run:  pip3 install -r requirements/common.txt
     - name: Run Unit Cases
       run:  python3 manage.py test
       env:
