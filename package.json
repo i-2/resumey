@@ -4,6 +4,7 @@
     "description": "",
     "main": "frontend/index.ts",
     "scripts": {
+        "test": "jest",
         "builddev": "NODE_ENV=dev parcel watch frontend/index.ts --out-dir static/js",
         "buildprod": "NODE_ENV=production parcel watch frontend/index.ts --out-dir static/js",
         "boom": "NODE_ENV=production parcel build frontend/index.ts --out-dir static/js --no-source-maps --detailed-report --log-level 0"
@@ -19,6 +20,9 @@
     },
     "homepage": "https://github.com/i-2/resumey#readme",
     "devDependencies": {
+        "@types/jest": "^26.0.19",
+        "@types/mocha": "^8.2.0",
+        "jest": "^26.6.3",
         "parcel": "^1.12.4",
         "typescript": "^4.1.3"
     }
