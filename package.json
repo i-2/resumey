@@ -1,0 +1,25 @@
+{
+    "name": "resumey",
+    "version": "1.0.0",
+    "description": "",
+    "main": "frontend/index.ts",
+    "scripts": {
+        "builddev": "NODE_ENV=dev parcel watch frontend/index.ts --out-dir static/js",
+        "buildprod": "NODE_ENV=production parcel watch frontend/index.ts --out-dir static/js",
+        "boom": "NODE_ENV=production parcel build frontend/index.ts --out-dir static/js --no-source-maps --detailed-report --log-level 0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/i-2/resumey.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/i-2/resumey/issues"
+    },
+    "homepage": "https://github.com/i-2/resumey#readme",
+    "devDependencies": {
+        "parcel": "^1.12.4",
+        "typescript": "^4.1.3"
+    }
+}
