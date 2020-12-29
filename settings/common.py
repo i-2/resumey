@@ -52,7 +52,7 @@ DATABASES = {
 
 # Application definition
 
-INSTALLED_APPS = [
+VENDOR_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,6 +61,12 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
 ]
+
+THIRD_PARTY_APPS = []
+
+DJANGO_APPS = ["resumey.builder"]
+
+INSTALLED_APPS = VENDOR_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 
 
 MIDDLEWARE = [
@@ -86,7 +92,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
