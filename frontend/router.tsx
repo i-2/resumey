@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { HashRouter } from 'react-router-dom';
 import App from './components/App';
-import { ThemeProvider, defaultTheme } from 'evergreen-ui';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const Routers = () => (
     <Provider store={store}>
         <HashRouter>
-            <ThemeProvider value={{ ...defaultTheme, spinnerColor: 'blue' }}>
+            <ChakraProvider>
                 <App />
-            </ThemeProvider>
+            </ChakraProvider>
         </HashRouter>
     </Provider>
 );
