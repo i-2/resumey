@@ -5,6 +5,7 @@
     "main": "frontend/index.ts",
     "scripts": {
         "test": "jest",
+        "snapshot": "jest --updateSnapshot",
         "builddev": "NODE_ENV=dev parcel watch frontend/index.tsx --out-dir static/js",
         "buildprod": "NODE_ENV=production parcel watch frontend/index.tsx --out-dir static/js",
         "boom": "NODE_ENV=production parcel build frontend/index.tsx --out-dir static/js --no-source-maps --detailed-report --log-level 0"

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Box, Button, FormControl, FormLabel, Input, FormErrorMessage, Heading, Wrap, WrapItem
+    Flex, Button, FormControl, FormLabel, Input, FormErrorMessage, Text, Wrap, WrapItem
 } from '@chakra-ui/react';
 import {
     Form,
@@ -20,8 +20,8 @@ export interface PersonalDetailProps {
 
 
 export function renderField(values: ValueProps[]) {
-    return (<Wrap>
-        {values.map((value: any, i: number) => <WrapItem w="45%" m="5"><Field key={i} name={value.name}>
+    return (<Wrap width="100%">
+        {values.map((value: any, i: number) => <WrapItem width="45%" margin="10px"><Field key={i} name={value.name}>
             {({ field, form }: any) => (
                 <FormControl isInvalid={form.errors.name && form.touched.name}>
                     <FormLabel htmlFor={value.name}> {value.title} </FormLabel>
@@ -35,32 +35,30 @@ export function renderField(values: ValueProps[]) {
 
 
 
-export const PersonalDetails = (props: ) => (
-    <Box width="inherit" borderRadius="50" m="5" centerContent>
-        <Heading> Personal Details </Heading>
+export const PersonalDetails = (props: PersonalDetailProps) => (
+    <Flex width="100%" direction="row" justify="center">
         <Formik
             initialValues={{}}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}>
+            onSubmit={(values, { setSubmitting }) => { }}>
+            <Flex width="100%" direction="column" justify="center">
+                <Form style={{ width: "100%" }}>
+                    <Flex width="100%" direction="row" justify="space-between">
+                        {renderField(props.schema)}
+                    </Flex>
+                    <Button
+                        mt={4}
+                        colorScheme="teal"
+                        isLoading={false}
+                        type="submit"
+                        m="5"
+                    >
+                        Next
+                        </Button>
 
-            <Form>
-                {renderField(props.schema)}
-                <Button
-                    mt={4}
-                    colorScheme="teal"
-                    isLoading={props.isSubmitting}
-                    type="submit"
-                    m="5"
-                >
-                    Submit
-                </Button>
-            </Form>
-
+                </Form>
+            </Flex>
         </Formik>
+    </Flex>
 
-    </Box>
+
 )
