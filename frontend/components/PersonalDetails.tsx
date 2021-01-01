@@ -15,13 +15,14 @@ export interface ValueProps {
 }
 
 export interface PersonalDetailProps {
-    schema: ValueProps[]
+    schema: ValueProps[],
+    onNext: () => any;
 }
 
 
 export function renderField(values: ValueProps[]) {
     return (<Wrap width="100%">
-        {values.map((value: any, i: number) => <WrapItem width="45%" margin="10px"><Field key={i} name={value.name}>
+        {values.map((value: any, i: number) => <WrapItem key={i} width="45%" margin="10px"><Field name={value.name}>
             {({ field, form }: any) => (
                 <FormControl isInvalid={form.errors.name && form.touched.name}>
                     <FormLabel htmlFor={value.name}> {value.title} </FormLabel>
@@ -51,6 +52,7 @@ export const PersonalDetails = (props: PersonalDetailProps) => (
                         isLoading={false}
                         type="submit"
                         m="5"
+                        onClick={props.onNext}
                     >
                         Next
                         </Button>

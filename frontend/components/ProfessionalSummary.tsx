@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Flex, FormControl, FormLabel, Textarea, FormErrorMessage
+    Flex, FormControl, FormLabel, Textarea, FormErrorMessage, Button
 } from '@chakra-ui/react';
 import {
     Form,
@@ -30,6 +30,16 @@ export function ProfessionalSummary(props: any) {
 
                             )}
                         </Field>
+                        <Button
+                            mt={4}
+                            colorScheme="teal"
+                            isLoading={false}
+                            onClick={props.onNext}
+                            type="submit"
+                            m="5"
+                        >
+                            Next
+                        </Button>
                     </Form>
                 </Flex>
             </Formik>

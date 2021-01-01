@@ -1,3 +1,3 @@
 
 export * from './type';
-export * from './resumeActions';
+export * from './wizardActions';

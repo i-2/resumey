@@ -1,7 +1,4 @@
 import { combineReducers } from "redux";
+import { wizard } from './wizard';
 
-function test(state={}, action: any) {
-    return state
-}
-
-export default combineReducers({ test })
+export default combineReducers({ wizard })

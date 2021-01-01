@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
-import { ProgressBar } from './ProgressBar';
+import React from 'react';
+import { Flex, Text } from '@chakra-ui/react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions';
 import { PersonalDetails } from './PersonalDetails';
 import { ProfessionalSummary } from './ProfessionalSummary';
 import { Wizard } from './Wizard';
@@ -15,20 +17,24 @@ const PERSONAL_DETAIL_SCHEMA: any[] = [
     { "title": "Address", "name": "address" },
     { "title": "Postal Code", "name": "pinCode" }
 ]
-export default class App extends Component<any> {
-    render() {
-        return (<Flex direction="column"
-            align="center"
-            maxW={{ xl: "1200px" }}
-            m="0 auto">
-            <Flex w="100%" justify="center"> <Text fontSize="3xl"> Resume Builder </Text> </Flex>
-            <Flex w="100%" justify="center"><ProgressBar value={40} /></Flex>
-            <Wizard tabs={
-                [
-                    { "title": "Personal Details", "component": <PersonalDetails schema={PERSONAL_DETAIL_SCHEMA} /> },
-                    { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" /> }
-                ]
-            } />
-        </Flex>)
-    }
-}
+export const _App = (props: any) => (
+    <Flex direction="column"
+        align="center"
+        maxW={{ xl: "1200px" }}
+        m="0 auto">
+        <Flex w="100%" justify="center">
+            <Text fontSize="3xl"> Resume Builder </Text>
+        </Flex>
+        <Wizard tabs={
+            [
+                { "title": "Personal Details", "component": <PersonalDetails schema={PERSONAL_DETAIL_SCHEMA} onNext={() => props.updateWizard(1)} /> },
+                { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" onNext={() => props.updateWizard(2)} /> }
+            ]
+        } count={props.count} />
+    </Flex>
+)
+
+const mapStateToProps = (state: any) => ({ count: state.wizard.windowCount })
+const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(_App);

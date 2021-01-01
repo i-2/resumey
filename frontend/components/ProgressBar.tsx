@@ -7,7 +7,7 @@ export interface ProgressBarProps {
 }
 
 export const ProgressBar = (props: ProgressBarProps) => (
-    <Box width="inherit" borderRadius="50" m="5" centerContent>
+    <Box width="inherit" borderRadius="50" m="5">
         <Flex>
             <Box p="1">
                 Completion : {props.value}%
