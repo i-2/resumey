@@ -28,7 +28,9 @@ export const Wizard = (props: WizardProps) => {
     const percentage = Math.floor((props.count / props.tabs.length) * 100);
     return (
         <Flex width="100%" borderRadius="50" m="5" justify="center" direction="column">
-            <Flex w="100%" justify="center"><ProgressBar value={percentage} /></Flex>
+            <Flex w="100%" justify="center">
+                <ProgressBar value={percentage} />
+            </Flex>
             {
                 <Flex justify="center" direction="column">
                     <Flex direction="row" justify="center">

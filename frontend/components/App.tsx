@@ -3,7 +3,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions';
-import { PersonalDetails } from './PersonalDetails';
+import { Details } from './Details';
 import { ProfessionalSummary } from './ProfessionalSummary';
 import { Wizard } from './Wizard';
 
@@ -27,8 +27,8 @@ export const _App = (props: any) => (
         </Flex>
         <Wizard tabs={
             [
-                { "title": "Personal Details", "component": <PersonalDetails schema={PERSONAL_DETAIL_SCHEMA} onNext={() => props.updateWizard(1)} /> },
-                { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" onNext={() => props.updateWizard(2)} /> }
+                { "title": "Personal Details", "component": <Details schema={PERSONAL_DETAIL_SCHEMA} onNext={() => props.updateWizard(1)} /> },
+                { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" onNext={() => props.updateWizard(2)} onPrev={() => props.updateWizard(0)} /> }
             ]
         } count={props.count} />
     </Flex>

@@ -34,6 +34,15 @@ export function ProfessionalSummary(props: any) {
                             mt={4}
                             colorScheme="teal"
                             isLoading={false}
+                            onClick={props.onPrev}
+                            m="5"
+                        >
+                            Previous
+                        </Button>
+                        <Button
+                            mt={4}
+                            colorScheme="teal"
+                            isLoading={false}
                             onClick={props.onNext}
                             type="submit"
                             m="5"
