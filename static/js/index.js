@@ -34277,8 +34277,7 @@ function personalDetail(state, action) {
 
   switch (action.type) {
     case 'UPDATE_PERSONAL_DETAIL':
-      state[action.payload.name] += action.payload.value;
-      return state;
+      return action.payload;
 
     default:
       return state;
@@ -94264,13 +94263,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function updatePersonalDetail(name, value) {
+function updatePersonalDetail(value) {
   return {
     type: 'UPDATE_PERSONAL_DETAIL',
-    payload: {
-      name: name,
-      value: value
-    }
+    payload: value
   };
 }
 
@@ -109114,7 +109110,7 @@ function getValidation(schema) {
   return Yup.object().shape(values);
 }
 
-function renderField(values, props) {
+function renderField(values) {
   return react_1.default.createElement(react_2.Wrap, {
     width: "100%"
   }, values.map(function (value, i) {
@@ -109133,11 +109129,7 @@ function renderField(values, props) {
         htmlFor: value[value.name]
       }, " ", value.title, " "), react_1.default.createElement(react_2.Input, __assign({}, field, {
         id: value[value.name],
-        placeholder: value.title,
-        value: props.values[value.name],
-        onChange: function onChange(e) {
-          props.onDetailChange(value.name, e.target.value);
-        }
+        placeholder: value.title
       })), react_1.default.createElement(react_2.FormErrorMessage, null, form.errors[value.name]));
     }));
   }));
@@ -109155,9 +109147,10 @@ exports.Details = function (props) {
     direction: "column",
     justify: "center"
   }, react_1.default.createElement(formik_1.Formik, {
-    initialValues: getValues(props.schema),
+    initialValues: props.initValues,
     validationSchema: getValidation(props.schema),
     onSubmit: function onSubmit(values, actions) {
+      props.submitValues(values);
       props.onNext();
     }
   }, function (innerProps) {
@@ -109170,7 +109163,7 @@ exports.Details = function (props) {
       width: "100%",
       direction: "row",
       justify: "space-between"
-    }, renderField(props.schema, props)), react_1.default.createElement(react_2.Button, {
+    }, renderField(props.schema)), react_1.default.createElement(react_2.Button, {
       mt: 4,
       colorScheme: "teal",
       type: "submit",
@@ -111445,12 +111438,12 @@ exports._App = function (props) {
       "title": "Personal Details",
       "component": react_1.default.createElement(Details_1.Details, {
         schema: PERSONAL_DETAIL_SCHEMA,
-        values: props.values,
+        initValues: props.initValues,
         onNext: function onNext() {
           return props.updateWizard(1);
         },
-        onDetailChange: function onDetailChange(name, value) {
-          props.updatePersonalDetail(name, value);
+        submitValues: function submitValues(values) {
+          return props.updatePersonalDetail(values);
         }
       })
     }, {
@@ -111473,7 +111466,7 @@ exports._App = function (props) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     count: state.wizard.windowCount,
-    values: state.personalDetail
+    initValues: state.personalDetail
   };
 };
 
@@ -111562,7 +111555,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33399" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

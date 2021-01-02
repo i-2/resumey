@@ -14,8 +14,7 @@ const initalState = {
 export function personalDetail(state: any = initalState, action: Action<any>) {
     switch (action.type) {
         case 'UPDATE_PERSONAL_DETAIL':
-            state[action.payload.name] += action.payload.value;
-            return state
+            return action.payload
         default:
             return state
     }

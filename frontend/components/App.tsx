@@ -33,11 +33,9 @@ export const _App = (props: any) => (
                 {
                     "title": "Personal Details", "component": <Details
                         schema={PERSONAL_DETAIL_SCHEMA}
-                        values={props.values}
+                        initValues={props.initValues}
                         onNext={() => props.updateWizard(1)}
-                        onDetailChange={(name, value) => {
-                            props.updatePersonalDetail(name, value);
-                        }}
+                        submitValues = {(values: any) => props.updatePersonalDetail(values) }
                     />
                 },
                 { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" onNext={() => props.updateWizard(2)} onPrev={() => props.updateWizard(0)} /> }
@@ -46,7 +44,10 @@ export const _App = (props: any) => (
     </Flex>
 )
 
-const mapStateToProps = (state: any) => ({ count: state.wizard.windowCount, values: state.personalDetail })
+const mapStateToProps = (state: any) => (
+    { count: state.wizard.windowCount, 
+      initValues: state.personalDetail 
+    })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(_App);

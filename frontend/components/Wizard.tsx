@@ -19,11 +19,12 @@ export interface WizardProps {
 }
 
 export const Wizard = (props: WizardProps) => {
+    let X;
     if (props.count < props.tabs.length) {
-        const X = props.tabs[props.count];
+        X = props.tabs[props.count];
     }
     else {
-        const X = { "title": "Completed", "component": <Completed /> }
+        X = { "title": "Completed", "component": <Completed /> }
     }
     const percentage = Math.floor((props.count / props.tabs.length) * 100);
     return (
