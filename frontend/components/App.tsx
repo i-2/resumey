@@ -6,6 +6,7 @@ import * as actionCreators from '../actions';
 import { Details } from './Details';
 import { ProfessionalSummary } from './ProfessionalSummary';
 import { Wizard } from './Wizard';
+import { EmploymentHistory } from './EmploymentHistory';
 import * as Yup from 'yup';
 
 const PERSONAL_DETAIL_SCHEMA: any[] = [
@@ -35,18 +36,32 @@ export const _App = (props: any) => (
                         schema={PERSONAL_DETAIL_SCHEMA}
                         initValues={props.initValues}
                         onNext={() => props.updateWizard(1)}
-                        submitValues = {(values: any) => props.updatePersonalDetail(values) }
+                        submitValues={(values: any) => props.updatePersonalDetail(values)}
                     />
                 },
-                { "title": "Professional Summary", "component": <ProfessionalSummary title="Summary" name="summary" onNext={() => props.updateWizard(2)} onPrev={() => props.updateWizard(0)} /> }
+                {
+                    "title": "Professional Summary", "component": <ProfessionalSummary
+                        title="Summary"
+                        name="summary"
+                        initValues={props.summary}
+                        onNext={() => props.updateWizard(2)}
+                        onPrev={() => props.updateWizard(0)}
+                        submitValues={(values: any) => props.updateProfSummary(values)}
+                    />
+                },
+                {
+                    "title": "Employment History", "component":  <EmploymentHistory />
+                }
             ]
         } count={props.count} />
     </Flex>
 )
 
 const mapStateToProps = (state: any) => (
-    { count: state.wizard.windowCount, 
-      initValues: state.personalDetail 
+    {
+        count: state.wizard.windowCount,
+        initValues: state.personalDetail,
+        summary: state.profSummary
     })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 

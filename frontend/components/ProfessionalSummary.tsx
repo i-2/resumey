@@ -3,54 +3,78 @@ import {
     Flex, FormControl, FormLabel, Textarea, FormErrorMessage, Button
 } from '@chakra-ui/react';
 import {
-    Form,
     Field,
     Formik,
 } from 'formik';
+import * as Yup from 'yup';
 
-export function ProfessionalSummary(props: any) {
-    const title = props.title;
-    const name = props.name;
+const SummarySchema = Yup.object().shape(
+    { "summary": Yup.string().required() }
+)
+
+export interface ProfessionalSummaryProps {
+    name: string,
+    title: string,
+    initValues: any,
+    onNext: () => any,
+    onPrev: () => any,
+    submitValues: (values: any) => any
+}
+
+export function ProfessionalSummary(props: ProfessionalSummaryProps) {
+    const { name, title } = props;
     return (
 
         <Flex width="100%" direction="row" justify="center">
             <Formik
-                initialValues={{}}
-                onSubmit={(values, { setSubmitting }) => { }}>
-                <Flex width="100%" direction="column" justify="center">
-                    <Form style={{ width: "100%" }}>
-                        <Field>
-                            {({ field, form }: any) => (
+                initialValues={props.initValues}
+                validationSchema={SummarySchema}
+                onSubmit={(values, actions) => {
+                    props.onNext();
+                    props.submitValues(values);
+                }}>
+                {
+                    (innerProps: any) => (
+                        <Flex width="100%" direction="column" justify="center">
+                            <form style={{ width: "100%" }} onSubmit={innerProps.handleSubmit}>
+                                <Field name={name}>
+                                    {({ field, form }: any) => {
 
-                                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                    <FormLabel htmlFor={name}> {title} </FormLabel>
-                                    <Textarea name={name} placeholder="Enter your professional summary" />
-                                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                                </FormControl>
+                                        return (
 
-                            )}
-                        </Field>
-                        <Button
-                            mt={4}
-                            colorScheme="teal"
-                            isLoading={false}
-                            onClick={props.onPrev}
-                            m="5"
-                        >
-                            Previous
-                        </Button>
-                        <Button
-                            mt={4}
-                            colorScheme="teal"
-                            isLoading={false}
-                            onClick={props.onNext}
-                            type="submit"
-                            m="5"
-                        >
-                            Next
-                        </Button>
-                    </Form>
-                </Flex>
+                                            <FormControl isInvalid={form.errors.summary && form.touched.summary}>
+                                                <FormLabel htmlFor={name}> {title} </FormLabel>
+                                                <Textarea placeholder="Enter your professional summary"  {...field} />
+                                                <FormErrorMessage>{form.errors.summary}</FormErrorMessage>
+                                            </FormControl>
+
+                                        )
+                                    }
+                                    }
+                                </Field>
+                                <Button
+                                    mt={4}
+                                    colorScheme="teal"
+                                    isLoading={false}
+                                    onClick={props.onPrev}
+                                    m="5"
+                                >
+                                    Previous
+                                </Button>
+                                <Button
+                                    mt={4}
+                                    colorScheme="teal"
+                                    isLoading={false}
+                                    type="submit"
+                                    m="5"
+                                >
+                                    Next
+                                </Button>
+                            </form>
+                        </Flex>
+                    )
+                }
+
             </Formik>
         </Flex>
 
