@@ -8,8 +8,6 @@ exports[`renders completed correctly 1`] = `
     className="css-1pq59s1"
   >
     <form
-      action="#"
-      onReset={[Function]}
       onSubmit={[Function]}
       style={
         Object {
@@ -23,10 +21,11 @@ exports[`renders completed correctly 1`] = `
       >
         <label
           className="chakra-form__label css-1ig2arj"
-          htmlFor="field-1"
+          htmlFor=""
           id="field-1-label"
         >
            
+          
            
         </label>
         <textarea
@@ -34,16 +33,20 @@ exports[`renders completed correctly 1`] = `
           className="chakra-textarea css-0"
           disabled={false}
           id="field-1"
+          name=""
           onBlur={[Function]}
+          onChange={[Function]}
           onFocus={[Function]}
           placeholder="Enter your professional summary"
           readOnly={false}
           required={false}
+          value={Object {}}
         />
       </div>
       <button
         className="chakra-button css-1bgvtth"
         disabled={false}
+        onClick={[Function]}
         type="button"
       >
         Previous
