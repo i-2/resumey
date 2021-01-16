@@ -21,47 +21,55 @@ const PERSONAL_DETAIL_SCHEMA: any[] = [
 ]
 
 
-export const _App = (props: any) => (
-    <Flex direction="column"
-        align="center"
-        maxW={{ xl: "1200px" }}
-        m="0 auto">
-        <Flex w="100%" justify="center">
-            <Text fontSize="3xl"> Resume Builder </Text>
+export const _App = (props: any) => {
+    console.log(props.employment);
+    return (
+        <Flex direction="column"
+            align="center"
+            maxW={{ xl: "1200px" }}
+            m="0 auto">
+            <Flex w="100%" justify="center">
+                <Text fontSize="3xl"> Resume Builder </Text>
+            </Flex>
+            <Wizard tabs={
+                [
+                    {
+                        "title": "Personal Details", "component": <Details
+                            schema={PERSONAL_DETAIL_SCHEMA}
+                            initValues={props.initValues}
+                            onNext={() => props.updateWizard(1)}
+                            submitValues={(values: any) => props.updatePersonalDetail(values)}
+                        />
+                    },
+                    {
+                        "title": "Professional Summary", "component": <ProfessionalSummary
+                            title="Summary"
+                            name="summary"
+                            initValues={props.summary}
+                            onNext={() => props.updateWizard(2)}
+                            onPrev={() => props.updateWizard(0)}
+                            submitValues={(values: any) => props.updateProfSummary(values)}
+                        />
+                    },
+                    {
+                        "title": "Employment History", "component": <EmploymentHistory 
+                            history={props.employment}
+                            onPrevious={() => props.updateWizard(1)}
+                            onAddMore={() => props.addMoreDetail()}
+                        />
+                    }
+                ]
+            } count={props.count} />
         </Flex>
-        <Wizard tabs={
-            [
-                {
-                    "title": "Personal Details", "component": <Details
-                        schema={PERSONAL_DETAIL_SCHEMA}
-                        initValues={props.initValues}
-                        onNext={() => props.updateWizard(1)}
-                        submitValues={(values: any) => props.updatePersonalDetail(values)}
-                    />
-                },
-                {
-                    "title": "Professional Summary", "component": <ProfessionalSummary
-                        title="Summary"
-                        name="summary"
-                        initValues={props.summary}
-                        onNext={() => props.updateWizard(2)}
-                        onPrev={() => props.updateWizard(0)}
-                        submitValues={(values: any) => props.updateProfSummary(values)}
-                    />
-                },
-                {
-                    "title": "Employment History", "component":  <EmploymentHistory />
-                }
-            ]
-        } count={props.count} />
-    </Flex>
-)
+    )
+}
 
 const mapStateToProps = (state: any) => (
     {
         count: state.wizard.windowCount,
         initValues: state.personalDetail,
-        summary: state.profSummary
+        summary: state.profSummary,
+        employment: state.employment
     })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 
