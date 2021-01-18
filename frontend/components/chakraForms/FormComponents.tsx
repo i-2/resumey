@@ -3,7 +3,7 @@ import {
     FormControl, FormLabel, Input, FormErrorMessage, Textarea
 } from '@chakra-ui/react';
 import {
-    Field, useField, useFormikContext,
+    useField, useFormikContext,
 } from 'formik';
 import DatePicker from "react-datepicker";
 
@@ -29,29 +29,28 @@ function getComponent(type: string) {
     }
 }
 
-export function renderType(type: string, field: any, form: any, meta: any, value: any, setFieldValue: any, placeholder: any) {
-    const HCType: React.ElementType = getComponent(type);
-    return <HCType {...field} onChange={setFieldValue} onSelect={setFieldValue} placeholder={placeholder} value={value} />
-}
-
-
-export function ChakraField({ name, type, title, placeholder, defaultValue }: FieldProp) {
+export function ChakraField(props: FieldProp) {
+    const { setFieldValue } = useFormikContext();
+    const HCType: React.ElementType = getComponent(props.type);
+    const [field, meta, _] = useField(props);
+    const [defaultValue, setState] = useState(props.defaultValue);
     return (
-        <Field name={name} >
-            {({ field, form, meta, setFieldValue }: any) => (
-                <FormControl isInvalid={meta.touched && meta.error}>
-                    <FormLabel htmlFor={name}> {title} </FormLabel>
+        <FormControl isInvalid={meta.touched && meta.error}>
+            <FormLabel htmlFor={props.name}> {props.title} </FormLabel>
 
-                    {renderType(type, field, form, meta, defaultValue, setFieldValue, placeholder)}
+            <HCType {...field} {...props} value={defaultValue} onChange={(value) => {
+                const currentValue = value.currentTarget.value;
+                setState(currentValue);
+                setFieldValue(field.name, currentValue);
+            }} />
 
-                    <FormErrorMessage>{meta.error}</FormErrorMessage>
-                </FormControl>
-            )}
-        </Field>
+            <FormErrorMessage>{meta.error}</FormErrorMessage>
+        </FormControl>
     )
+
 }
 
-export const ChakraDateField = (props : any) => {
+export const ChakraDateField = (props: FieldProp) => {
     const { setFieldValue } = useFormikContext();
     const [field, meta, _] = useField(props);
     const [defaultValue, setState] = useState(props.defaultValue ? props.defaultValue : new Date());

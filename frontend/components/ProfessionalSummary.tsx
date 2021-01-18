@@ -35,7 +35,7 @@ export function ProfessionalSummary(props: ProfessionalSummaryProps) {
                 }}>
                 {
                     (innerProps: any) => (
-                        <Flex width="100%" direction="column" justify="center">
+                        <Flex width="100%" direction="column" justify="center" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
                             <form style={{ width: "100%" }} onSubmit={innerProps.handleSubmit}>
                                 <Field name={name}>
                                     {({ field, form }: any) => {

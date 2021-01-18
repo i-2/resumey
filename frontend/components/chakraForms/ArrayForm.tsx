@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-    Flex, Button, Wrap, WrapItem, Box
+    Flex, Button, Wrap, WrapItem, Text, Center
 } from '@chakra-ui/react';
 import {
     FieldArray,
     Formik,
 } from 'formik';
-import * as Yup from 'yup';
+
 import { ChakraDateField, ChakraField } from './FormComponents';
-
-
 
 export function renderButtons({ onAddMore, onPrevious }: any) {
     return (
@@ -52,14 +50,14 @@ function renderFormField(name: string, fields: any, index: number, value: any) {
         return type == "text" ? "92%" : "45%";
     }
 
-    return fields.map((field: any, i: number) => field.type != "date" ? <WrapItem key={i} width={renderWidth(field.type)} margin="10px">
+    return fields.map((field: any, i: number) => field.type != "date" ? <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px">
         <ChakraField
             name={`${name}[${index}].${field.name}`}
             type={field.type}
             placeholder={field.placeholder}
             title={field.title}
             defaultValue={value[field.name]}
-        /></WrapItem> : <WrapItem key={i} width={renderWidth(field.type)} margin="10px">
+        /></WrapItem> : <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px" >
             <ChakraDateField name={`${name}[${index}].${field.name}`}
                 type={field.type}
                 placeholder={field.placeholder}
@@ -74,15 +72,21 @@ function renderFieldArray({ name, fields, values }: any) {
         <FieldArray name={name}>
             {
 
-                (_: any) => (
-
-                    <Wrap width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
-                        {values[name].map((value: any, index: number) => renderFormField(name, fields, index, value))}
-                    </Wrap>
-
-                )
+                (_: any) => values[name].map((value: any, index: number) => (
+                        <Wrap key={index} width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
+                            {renderFormField(name, fields, index, value)}
+                        </Wrap>))
             }
         </FieldArray>)
+}
+
+
+function renderEmptyNotice() {
+    return (
+        <Flex width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
+            <Center><Text> Click on Add More !! </Text></Center>
+        </Flex>
+    )
 }
 
 export const ArrayForm = (props: any) =>
@@ -97,7 +101,7 @@ export const ArrayForm = (props: any) =>
                 (innerProps: any) => (
                     <Flex width="100%" direction="column" justify="center">
                         <form style={{ width: "100%" }} onSubmit={innerProps.handleSubmit}>
-                            {renderFieldArray({ name: props.name, fields: props.fields, values: props.initValues })}
+                            {props.initValues[props.name].length > 0 ? renderFieldArray({ name: props.name, fields: props.fields, values: props.initValues }) : renderEmptyNotice()}
                             {renderButtons({ onPrevious: props.onPrevious, onAddMore: props.onAddMore })}
                         </form>
                     </Flex>

@@ -39,7 +39,7 @@ function getValidation(schema: ValueProps[]) {
 
 
 export function renderField(values: ValueProps[]) {
-    return (<Wrap width="100%">
+    return (<Wrap width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
         {
             values.map((value: any, i: number) =>
                 <WrapItem key={i} width="45%" margin="10px">
