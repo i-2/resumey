@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders completed correctly 1`] = `
+<div
+  className="css-2l42up"
+>
+  <div
+    className="css-1bgjfgj"
+  >
+    <form
+      onSubmit={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="chakra-form-control css-1kxonj9"
+        role="group"
+      >
+        <label
+          className="chakra-form__label css-1ig2arj"
+          htmlFor=""
+          id="field-1-label"
+        >
+           
+          
+           
+        </label>
+        <textarea
+          aria-describedby="field-1-feedback"
+          className="chakra-textarea css-0"
+          disabled={false}
+          id="field-1"
+          name=""
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Enter your professional summary"
+          readOnly={false}
+          required={false}
+          value={Object {}}
+        />
+      </div>
+      <button
+        className="chakra-button css-1bgvtth"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Previous
+      </button>
+      <button
+        className="chakra-button css-1bgvtth"
+        disabled={false}
+        type="submit"
+      >
+        Next
+      </button>
+    </form>
+  </div>
+</div>
+`;
