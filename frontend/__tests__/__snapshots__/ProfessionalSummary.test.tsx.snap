@@ -5,7 +5,7 @@ exports[`renders completed correctly 1`] = `
   className="css-2l42up"
 >
   <div
-    className="css-1pq59s1"
+    className="css-1bgjfgj"
   >
     <form
       onSubmit={[Function]}
