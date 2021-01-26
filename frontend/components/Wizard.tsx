@@ -24,7 +24,7 @@ export const Wizard = (props: WizardProps) => {
         X = props.tabs[props.count];
     }
     else {
-        X = { "title": "Completed", "component": <Completed /> }
+        X = { "title": "", "component": <Completed /> }
     }
     const percentage = Math.floor((props.count / props.tabs.length) * 100);
     return (

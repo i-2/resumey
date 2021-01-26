@@ -19,6 +19,7 @@ export interface DetailProps {
     initValues: any,
     onNext: () => any,
     submitValues: (value: any) => any
+    onPrevious?: () => any
 }
 
 function getValues(schema: ValueProps[]) {
@@ -78,6 +79,16 @@ export const Details = (props: DetailProps) => {
                             <Flex width="100%" direction="row" justify="space-between">
                                 {renderField(props.schema)}
                             </Flex>
+                            {
+                                props.onPrevious ? <Button
+                                    mt={4}
+                                    colorScheme="teal"
+                                    type="submit"
+                                    m="5"
+                                    onClick={props.onPrevious}
+                                >
+                                    Previous </Button> : <div></div>
+                            }
                             <Button
                                 mt={4}
                                 colorScheme="teal"
@@ -86,6 +97,7 @@ export const Details = (props: DetailProps) => {
                             >
                                 Next
                             </Button>
+
 
                         </form>
                     )

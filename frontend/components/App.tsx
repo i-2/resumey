@@ -22,8 +22,13 @@ const PERSONAL_DETAIL_SCHEMA: any[] = [
     { "title": "Postal Code", "name": "pinCode", "validate": Yup.string().required() }
 ]
 
+const SOCIAL_SCHEMA: any[] = [
+    { "title": "LinkedIn", "name": "linkedin", "validate": Yup.string().required() },
+    { "title": "Twitter", "name": "twitter", "validate": Yup.string().required() },
+    { "title": "Github", "name": "github", "validate": Yup.string().required() }
+]
 
-export const _App = (props: any) => { 
+export const _App = (props: any) => {
     return (
         <Flex direction="column"
             align="center"
@@ -37,7 +42,7 @@ export const _App = (props: any) => {
                     {
                         "title": "Personal Details", "component": <Details
                             schema={PERSONAL_DETAIL_SCHEMA}
-                            initValues={props.initValues}
+                            initValues={props.personal}
                             onNext={() => props.updateWizard(1)}
                             submitValues={(values: any) => props.updatePersonalDetail(values)}
                         />
@@ -53,7 +58,7 @@ export const _App = (props: any) => {
                         />
                     },
                     {
-                        "title": "Employment History", "component": <EmploymentHistory 
+                        "title": "Employment History", "component": <EmploymentHistory
                             history={props.employment}
                             onPrevious={() => props.updateWizard(1)}
                             onAddMore={() => props.addMoreEmpDetail()}
@@ -62,21 +67,29 @@ export const _App = (props: any) => {
                         />
                     },
                     {
-                        "title": "Education History", "component": <EducationHistory 
+                        "title": "Education History", "component": <EducationHistory
                             education={props.education}
                             onPrevious={() => props.updateWizard(2)}
                             onNext={() => props.updateWizard(4)}
                             onAddMore={() => props.addMoreEducationDetail()}
                             onSave={(values: any[]) => props.updateEducationDetails(values)}
                         />
+                    },{
+                        "title": "Skills", "component": <SkillDetails
+                            skills={props.skills}
+                            onPrevious={() => props.updateWizard(3)}
+                            onNext={() => props.updateWizard(5)}
+                            onAddMore={() => props.addMoreSkillDetail()}
+                            onSave={(values: any[]) => props.updateSkillDetails(values)} />
                     },
                     {
-                        "title": "Skills", "component": <SkillDetails
-                          skills={props.skills}
-                          onPrevious={() => props.updateWizard(3)}
-                          onNext={() => props.updateWizard(5)}
-                          onAddMore={() => props.addMoreSkillDetail()}
-                          onSave={(values: any[]) => props.updateSkillDetails(values)} />
+                        "title": "Social Details", "component": <Details
+                            schema={SOCIAL_SCHEMA}
+                            initValues={props.social}
+                            onNext={() => props.updateWizard(6)}
+                            onPrevious={() => props.updateWizard(4)}
+                            submitValues={(values: any) => props.updateLinks(values)}
+                        />
                     }
                 ]
             } count={props.count} />
@@ -87,11 +100,12 @@ export const _App = (props: any) => {
 const mapStateToProps = (state: any) => (
     {
         count: state.wizard.windowCount,
-        initValues: state.personalDetail,
+        personal: state.personalDetail,
         summary: state.profSummary,
         employment: state.employment,
         education: state.education,
-        skills: state.skill
+        skills: state.skill,
+        social: state.social
     })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 

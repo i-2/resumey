@@ -6,3 +6,4 @@ export * from './profSummary';
 export * from './employment';
 export * from './education';
 export * from './skills';
+export * from './social';
