@@ -86,3 +86,7 @@
   .react-datepicker-wrapper, .react-datepicker__input-container {
       border: none;
   }
+
+.dv-star-rating {
+  font-size: 25px;
+}
