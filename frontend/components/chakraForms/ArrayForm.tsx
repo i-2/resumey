@@ -6,10 +6,11 @@ import {
     FieldArray,
     Formik,
 } from 'formik';
+import * as Yup from 'yup';
 
-import { ChakraDateField, ChakraField } from './FormComponents';
+import { ChakraDateField, ChakraField, ChakraStarField } from './FormComponents';
 
-export function renderButtons({ onAddMore, onPrevious }: any) {
+export function renderButtons({ onAddMore, onPrevious, onSubmit }: any) {
     return (
         <Flex>
             <Button
@@ -35,6 +36,7 @@ export function renderButtons({ onAddMore, onPrevious }: any) {
                 colorScheme="teal"
                 isLoading={false}
                 type="submit"
+                onClick={onSubmit}
                 m="5"
             >
                 Next
@@ -50,19 +52,39 @@ function renderFormField(name: string, fields: any, index: number, value: any) {
         return type == "text" ? "92%" : "45%";
     }
 
-    return fields.map((field: any, i: number) => field.type != "date" ? <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px">
-        <ChakraField
-            name={`${name}[${index}].${field.name}`}
-            type={field.type}
-            placeholder={field.placeholder}
-            title={field.title}
-            defaultValue={value[field.name]}
-        /></WrapItem> : <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px" >
-            <ChakraDateField name={`${name}[${index}].${field.name}`}
-                type={field.type}
-                placeholder={field.placeholder}
-                title={field.title}
-                defaultValue={value[field.name]} /></WrapItem>)
+    return fields.map((field: any, i: number) => {
+        if (field.type == "date") {
+            return (
+                <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px" >
+                    <ChakraDateField name={`${name}[${index}].${field.name}`}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        title={field.title}
+                        defaultValue={value[field.name]} /></WrapItem>
+            )
+        } else if (field.type == "star") {
+            return (
+                <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px" >
+                    <ChakraStarField
+                        name={`${name}[${index}].${field.name}`}
+                        title={field.title}
+                        defaultValue={value[field.name]} />
+                </WrapItem>
+            )
+        } else {
+            return (
+                <WrapItem key={`${index}-${i}`} width={renderWidth(field.type)} margin="10px">
+                    <ChakraField
+                        name={`${name}[${index}].${field.name}`}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        title={field.title}
+                        defaultValue={value[field.name]}
+                    /></WrapItem>
+            )
+        }
+    }
+    
 }
 
 
@@ -73,9 +95,9 @@ function renderFieldArray({ name, fields, values }: any) {
             {
 
                 (_: any) => values[name].map((value: any, index: number) => (
-                        <Wrap key={index} width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
-                            {renderFormField(name, fields, index, value)}
-                        </Wrap>))
+                    <Wrap key={index} width="100%" borderWidth="1px" borderRadius="lg" padding="5%" marginTop="2%">
+                        {renderFormField(name, fields, index, value)}
+                    </Wrap>))
             }
         </FieldArray>)
 }
@@ -89,23 +111,39 @@ function renderEmptyNotice() {
     )
 }
 
+function calculateValidationScheme(formName: string, fields: any) {
+    let fieldLevelValidation: any = {};
+    for (let field of fields) {
+        fieldLevelValidation[field.name] = field.validate;
+    }
+    let formFields: any = {};
+    formFields[formName] = Yup.array().of(
+        Yup.object().shape(fieldLevelValidation)
+    )
+    return Yup.object().shape(formFields);
+}
+
+
 export const ArrayForm = (props: any) =>
 (
     <Flex width="100%" direction="row" justify="center" margin="2%">
         <Formik
             initialValues={props.initValues}
+            validationSchema={calculateValidationScheme(props.name, props.fields)}
             onSubmit={(values, actions) => {
-                console.log(values)
+                props.onSubmit(values[props.name]);
+                props.onNext();
             }}>
             {
-                (innerProps: any) => (
+                ({ handleSubmit, errors }: any) => (
                     <Flex width="100%" direction="column" justify="center">
-                        <form style={{ width: "100%" }} onSubmit={innerProps.handleSubmit}>
+                        <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                             {props.initValues[props.name].length > 0 ? renderFieldArray({ name: props.name, fields: props.fields, values: props.initValues }) : renderEmptyNotice()}
-                            {renderButtons({ onPrevious: props.onPrevious, onAddMore: props.onAddMore })}
+                            {renderButtons({ onPrevious: props.onPrevious, onAddMore: props.onAddMore, onSubmit: handleSubmit })}
                         </form>
                     </Flex>
                 )
+
             }
 
         </Formik>

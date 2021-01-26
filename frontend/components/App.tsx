@@ -7,6 +7,8 @@ import { Details } from './Details';
 import { ProfessionalSummary } from './ProfessionalSummary';
 import { Wizard } from './Wizard';
 import { EmploymentHistory } from './EmploymentHistory';
+import { EducationHistory } from './EducationHistory';
+import { SkillDetails } from './SkillDetails';
 import * as Yup from 'yup';
 
 const PERSONAL_DETAIL_SCHEMA: any[] = [
@@ -21,8 +23,7 @@ const PERSONAL_DETAIL_SCHEMA: any[] = [
 ]
 
 
-export const _App = (props: any) => {
-    console.log(props.employment);
+export const _App = (props: any) => { 
     return (
         <Flex direction="column"
             align="center"
@@ -55,8 +56,27 @@ export const _App = (props: any) => {
                         "title": "Employment History", "component": <EmploymentHistory 
                             history={props.employment}
                             onPrevious={() => props.updateWizard(1)}
-                            onAddMore={() => props.addMoreDetail()}
+                            onAddMore={() => props.addMoreEmpDetail()}
+                            onNext={() => props.updateWizard(3)}
+                            onSave={(values: any[]) => props.updateEmpDetails(values)}
                         />
+                    },
+                    {
+                        "title": "Education History", "component": <EducationHistory 
+                            education={props.education}
+                            onPrevious={() => props.updateWizard(2)}
+                            onNext={() => props.updateWizard(4)}
+                            onAddMore={() => props.addMoreEducationDetail()}
+                            onSave={(values: any[]) => props.updateEducationDetails(values)}
+                        />
+                    },
+                    {
+                        "title": "Skills", "component": <SkillDetails
+                          skills={props.skills}
+                          onPrevious={() => props.updateWizard(3)}
+                          onNext={() => props.updateWizard(5)}
+                          onAddMore={() => props.addMoreSkillDetail()}
+                          onSave={(values: any[]) => props.updateSkillDetails(values)} />
                     }
                 ]
             } count={props.count} />
@@ -69,7 +89,9 @@ const mapStateToProps = (state: any) => (
         count: state.wizard.windowCount,
         initValues: state.personalDetail,
         summary: state.profSummary,
-        employment: state.employment
+        employment: state.employment,
+        education: state.education,
+        skills: state.skill
     })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 

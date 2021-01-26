@@ -12,3 +12,9 @@ jobs:
        uses: Ilshidur/action-discord@master
        with:
          args: 'New Commit {{ EVENT_PAYLOAD.repository.full_name }}'
+     - name: Telegram Notification
+       uses: appleboy/telegram-action@master
+       with:
+         to: ${{ secrets.TELEGRAM_TO }}
+         token: ${{ secrets.TELEGRAM_TOKEN }}
+         args: The ${{ github.event_name }} event triggered on resumey.

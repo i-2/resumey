@@ -6,7 +6,7 @@ import {
     useField, useFormikContext,
 } from 'formik';
 import DatePicker from "react-datepicker";
-
+import StarRatingComponent from 'react-star-rating-component';
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.css";
 
@@ -76,3 +76,24 @@ export const ChakraDateField = (props: FieldProp) => {
 
     );
 };
+
+export const ChakraStarField = (props: any) => {
+    const { setFieldValue } = useFormikContext();
+    const [field, meta, _] = useField(props);
+    const [stars, setStars] = useState(props.defaultValue ? props.defaultValue : 1);
+    return (
+        <FormControl>
+            <FormLabel htmlFor={props.name}> {props.title} </FormLabel>
+            <StarRatingComponent 
+                name={props.name}
+                startCount={5}
+                rating={stars}
+                onStarClick={(v: number) => {
+                    setFieldValue(field.name, v);
+                    setStars(v);
+                }}
+                style={{fontSize: '25px'}}
+            />
+        </FormControl>
+    )
+}
