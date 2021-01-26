@@ -84,18 +84,37 @@ exports[`renders wizard correctly 1`] = `
         className="chakra-text css-1tapsqs"
       >
          
-        Completed
+        
          
       </p>
     </div>
     <div
       className="css-2l42up"
     >
-      <p
-        className="chakra-text css-0"
+      <div
+        className="css-1bgjfgj"
       >
-         Completed !! 
-      </p>
+        <div
+          className="css-1qeg6mr"
+        >
+          <h2
+            className="chakra-heading css-0"
+          >
+              Almost Complete! 
+          </h2>
+           
+        </div>
+        <div
+          className="css-1qeg6mr"
+        >
+          <button
+            className="chakra-button css-oqfhsh"
+            type="button"
+          >
+             Publish Now 
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
