@@ -20,4 +20,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("resumey.builder.urls")),
+    path(r"v1/", include("config.api_urls", namespace="api")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
