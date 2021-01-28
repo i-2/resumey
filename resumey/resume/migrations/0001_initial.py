@@ -7,17 +7,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ResumeDetail',
+            name="ResumeDetail",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('resume_json', models.JSONField(default={'education': [], 'employment': [], 'personal': {}, 'skills': [], 'social': {}, 'summary': {}})),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "resume_json",
+                    models.JSONField(
+                        default={
+                            "education": [],
+                            "employment": [],
+                            "personal": {},
+                            "skills": [],
+                            "social": {},
+                            "summary": {},
+                        }
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

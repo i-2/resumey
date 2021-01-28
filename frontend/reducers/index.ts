@@ -6,6 +6,7 @@ import { employment } from './employment';
 import { education } from './education';
 import { skill } from './skills';
 import { social } from './social';
+import { publish } from './publish';
 
 
-export default combineReducers({ wizard, personalDetail, profSummary, employment, education, skill, social })
+export default combineReducers({ wizard, personalDetail, profSummary, employment, education, skill, social, publish })

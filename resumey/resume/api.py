@@ -27,17 +27,14 @@ class CreateResumeAPI(CreateAPIView):
                 )
         except ValidationError as ve:
             return Response(
-                {
-                    "error": ve.detail,
-                },
-                status=status.HTTP_400_BAD_REQUEST,
+                {"error": ve.detail,}, status=status.HTTP_400_BAD_REQUEST,
             )
 
 
 class FetchResumeAPI(RetrieveAPIView):
 
     serializer_class = ResumeSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     lookup_field = "id"
 

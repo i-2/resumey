@@ -3,9 +3,10 @@ from resumey.resume.models import ResumeDetail
 from datetime import datetime
 from json import JSONEncoder, dumps
 
+
 class ResponseJSONEncoder(JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, (datetime, )):
+        if isinstance(obj, (datetime,)):
             return obj.strftime("%Y-%m-%d")
         return JSONEncoder.default(self, obj)
 

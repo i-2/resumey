@@ -14,6 +14,8 @@ class ResumeDetail(models.Model):
     }
 
     id = models.AutoField(primary_key=True)
-    resume_json = models.JSONField(blank=False, default=dict(DEFAULT_JSON_VALUE))
+    resume_json = models.JSONField(
+        blank=False, default=dict(DEFAULT_JSON_VALUE)
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
