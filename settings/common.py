@@ -62,9 +62,9 @@ VENDOR_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = ["rest_framework"]
 
-DJANGO_APPS = ["resumey.builder"]
+DJANGO_APPS = ["resumey.builder", "resumey.resume"]
 
 INSTALLED_APPS = VENDOR_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 

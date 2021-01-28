@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     FormControl, FormLabel, Input, FormErrorMessage, Textarea
 } from '@chakra-ui/react';
@@ -87,7 +87,7 @@ export const ChakraStarField = (props: any) => {
             <StarRatingComponent 
                 name={props.name}
                 startCount={5}
-                rating={stars}
+                value={stars}
                 onStarClick={(v: number) => {
                     setFieldValue(field.name, v);
                     setStars(v);
