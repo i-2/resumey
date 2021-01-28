@@ -27,7 +27,7 @@ class CreateResumeAPI(CreateAPIView):
                 resume = serializer.save()
                 return Response(
                     {"id": resume.id, "json": loads(resume.resume_json)},
-                    status=status.HTTP_200_OK,
+                    status=status.HTTP_201_CREATED,
                 )
         except ValidationError as ve:
             log.exception("[Errored]: %s", ve)
