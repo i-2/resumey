@@ -19,6 +19,7 @@ exports[`renders completed correctly 1`] = `
   >
     <button
       className="chakra-button css-oqfhsh"
+      onClick={[Function]}
       type="button"
     >
        Publish Now 
