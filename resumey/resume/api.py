@@ -1,3 +1,4 @@
+import logging
 from json import loads
 from django.http import Http404
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
@@ -8,6 +9,8 @@ from rest_framework.exceptions import ValidationError
 from resumey.resume.models import ResumeDetail
 from resumey.resume.serializers import ResumeSerializer
 
+log = logging.getLogger("django")
+
 
 class CreateResumeAPI(CreateAPIView):
 
@@ -16,6 +19,7 @@ class CreateResumeAPI(CreateAPIView):
 
     def create(self, request):
         try:
+            log.debug(request.data)
             serializer = self.get_serializer(
                 data=request.data, context={"request": request}
             )
@@ -26,8 +30,12 @@ class CreateResumeAPI(CreateAPIView):
                     status=status.HTTP_200_OK,
                 )
         except ValidationError as ve:
+            log.exception("[Errored]: %s", ve)
             return Response(
-                {"error": ve.detail,}, status=status.HTTP_400_BAD_REQUEST,
+                {
+                    "error": ve.detail,
+                },
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
 
@@ -40,6 +48,7 @@ class FetchResumeAPI(RetrieveAPIView):
 
     def get_object(self):
         try:
+            log.debug("[RESUME GET]: %s", self.kwargs["id"])
             resume = ResumeDetail.objects.get(id=self.kwargs["id"])
             return loads(resume.resume_json)
         except ResumeDetail.DoesNotExist:

@@ -1,0 +1,40 @@
+{
+    "personal": {
+        "firstName": "sathya",
+        "lastName": "balaji",
+        "email": "sathya@gmail.com",
+        "phone": "90304972",
+        "country": "india",
+        "city": "chennai",
+        "address": "etho",
+        "pinCode": 602024
+    },
+    "social": {
+        "linkedin": "https://linkedin.com/sathya",
+        "twitter": "https://twitter.com/sourcepirate",
+        "github": "https://github.com/sourcepirate"
+    },
+    "skills": [{
+        "skillName": "testName",
+        "skillRating": 5
+    }],
+    "education": [{
+        "school": "Modern",
+        "degree": "BE",
+        "start": "2007-01-01 00:00:00",
+        "end": "2007-01-01 00:00:00",
+        "city": "chennai",
+        "country": "india",
+        "description": "descr"
+    }],
+    "employment": [{
+        "employer": "ABC Co",
+        "designation": "Software Engineering",
+        "start": "2007-01-01 00:00:00",
+        "end": "2007-01-01 00:00:00",
+        "summary": "did this"
+    }],
+    "summary": {
+        "summary": "test"
+    }
+}
