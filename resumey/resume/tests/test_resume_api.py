@@ -24,7 +24,7 @@ class ResumeAPITestCase(TestCase):
             data=self._payload,
             content_type="application/json",
         )
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
     def test_fetch_resume_api(self):
         response = self.client.get(self.get_api_url)
