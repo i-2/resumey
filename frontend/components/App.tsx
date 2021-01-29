@@ -11,6 +11,13 @@ import { EducationHistory } from './EducationHistory';
 import { SkillDetails } from './SkillDetails';
 import * as Yup from 'yup';
 
+const UrlValidator = Yup.string()
+    .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        'Enter correct url!'
+    )
+    .required('Please enter website');
+
 const PERSONAL_DETAIL_SCHEMA: any[] = [
     { "title": "First Name", "name": "firstName", "validate": Yup.string().required() },
     { "title": "Last Name", "name": "lastName", "validate": Yup.string().required() },
@@ -23,9 +30,9 @@ const PERSONAL_DETAIL_SCHEMA: any[] = [
 ]
 
 const SOCIAL_SCHEMA: any[] = [
-    { "title": "LinkedIn", "name": "linkedin", "validate": Yup.string().required() },
-    { "title": "Twitter", "name": "twitter", "validate": Yup.string().required() },
-    { "title": "Github", "name": "github", "validate": Yup.string().required() }
+    { "title": "LinkedIn", "name": "linkedin", "validate": UrlValidator },
+    { "title": "Twitter", "name": "twitter", "validate": UrlValidator },
+    { "title": "Github", "name": "github", "validate": UrlValidator }
 ]
 
 export const _App = (props: any) => {
@@ -74,7 +81,7 @@ export const _App = (props: any) => {
                             onAddMore={() => props.addMoreEducationDetail()}
                             onSave={(values: any[]) => props.updateEducationDetails(values)}
                         />
-                    },{
+                    }, {
                         "title": "Skills", "component": <SkillDetails
                             skills={props.skills}
                             onPrevious={() => props.updateWizard(3)}
