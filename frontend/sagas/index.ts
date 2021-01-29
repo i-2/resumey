@@ -12,7 +12,7 @@ function* sendPublish() {
         education: state.education.map((x: TimeBounded) => cleanStartEnd(x)),
         employment: state.employment.map((x: TimeBounded) => cleanStartEnd(x))
     });
-    const urlLink = `https://${window.location.origin}/r/${idParams.id}`;
+    const urlLink = `${window.location.origin}/r/${idParams.id}`;
     yield put({
         type: 'PUBLISH', payload: {
             url: urlLink

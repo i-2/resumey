@@ -7,7 +7,7 @@ from json import JSONEncoder, dumps
 class ResponseJSONEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (datetime,)):
-            return obj.strftime("%Y-%m-%d %H:%M:%S")
+            return obj.strftime("%b-%Y")
         return JSONEncoder.default(self, obj)
 
 
