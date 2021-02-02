@@ -69,6 +69,7 @@ export const ChakraDateField = (props: FieldProp) => {
                     setFieldValue(field.name, val);
                     setState(val);
                 }}
+                showYearDropdown
                 customInput={<Input />}
             />
             <FormErrorMessage>{meta.error}</FormErrorMessage>
