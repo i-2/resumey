@@ -1,0 +1,125 @@
+{% load static %}
+<html>
+
+<head>
+    <title> Resume | {{ personal.firstName }} {{ personal.lastName }} </title>
+    <link rel="stylesheet" type="text/css" href={% static 'css/resume/resume-plain.css' %} />
+</head>
+
+<body>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <div class="container">
+        <div class="header">
+            <div class="full-name">
+                <span class="first-name">{{ personal.firstName | upper }}</span>
+                <span class="last-name">{{ personal.lastName | upper }}</span>
+            </div>
+            <div class="contact-info">
+                <span class="email">Email: </span>
+                <span class="email-val"> {{ personal.email }}</span>
+                <span class="separator"></span>
+                <span class="phone">Phone: </span>
+                <span class="phone-val"> {{ personal.phone }}</span>
+            </div>
+
+            <div class="about">
+                <span class="position">About Me </span>
+                <span class="desc">
+                    {{ summary.summary }}
+                </span>
+            </div>
+        </div>
+        <div class="details">
+            <div class="section">
+                <div class="section__title">Experience</div>
+                <div class="section__list">
+                    {% for item in employment %}
+                    <div class="section__list-item">
+                        <div class="left">
+                            <div class="name">{{ item.employer | upper }}</div>
+                            <div class="addr">{{ item.city | upper  }} - {{ item.country | upper }} </div>
+                            <div class="duration">{{ item.start }} - {{ item.end }}</div>
+                        </div>
+                        <div class="right">
+                            <div class="name"> {{ item.designation }}</div>
+                            <div class="desc">{{ item.summary }} </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="section">
+                <div class="section__title">Education</div>
+                <div class="section__list">
+                    {% for item in education %}
+                    <div class="section__list-item">
+                        <div class="left">
+                            <div class="name">{{ item.school | upper }}</div>
+                            <div class="addr">{{ item.city | upper  }} - {{ item.country | upper }} </div>
+                            <div class="duration">{{ item.start }} - {{ item.end }}</div>
+                        </div>
+                        <div class="right">
+                            <div class="name"> {{ item.degree }}</div>
+                            <div class="desc">{{ item.description }} </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="section">
+                <div class="section__title">Skills</div>
+                <div class="skills">
+                    {% for skill in skills %}
+                    <div class="skills__item">
+                        <div class="left">
+                            <div class="name">
+                                {{ skill.skillName | upper }}
+                            </div>
+                        </div>
+                        <div class="right">
+                            {% for _ in '01234' %}
+                                {% if forloop.counter <= skill.skillRating %}
+                                    <input id="ck{{forloop.counter}}" type="checkbox" checked />
+                                {% else %}
+                                    <input id="ck{{forloop.counter}}" type="checkbox" />
+                                {% endif %}
+                                <label id="ck{{forloop.counter}}"></label>
+                            {% endfor %}
+
+                        </div>
+                    {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="section">
+                <div class="section__title">
+                    Social
+                </div>
+                <div class="section__list">
+                    <div class="section__list-item">
+                        <ul style="list-style: none;">
+                            <li>
+                                <i class="fab fa-linkedin"></i>
+                                <span style="margin: 5px;">{{ social.linkedin }}</span>
+                            </li>
+                            <li>
+                                    <i class="fab fa-twitter-square"></i>
+                                    <span style="margin: 5px;">{{ social.twitter }}</span>
+                            </li>
+                            <li>
+                                <i class="fab fa-github-square"></i>
+                                <span style="margin: 5px;">{{ social.github }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

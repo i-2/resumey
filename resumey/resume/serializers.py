@@ -28,7 +28,7 @@ class SummarySerializer(serializers.Serializer):
 
 class SkillSerializer(serializers.Serializer):
     skillName = serializers.CharField(required=True)
-    skillRating = serializers.CharField(required=True)
+    skillRating = serializers.IntegerField(required=True)
 
 
 class EducationSerializer(serializers.Serializer):
