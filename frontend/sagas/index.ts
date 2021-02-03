@@ -10,7 +10,8 @@ function* sendPublish() {
         skills: state.skill,
         social: state.social,
         education: state.education.map((x: TimeBounded) => cleanStartEnd(x)),
-        employment: state.employment.map((x: TimeBounded) => cleanStartEnd(x))
+        employment: state.employment.map((x: TimeBounded) => cleanStartEnd(x)),
+        ...state.theme
     });
     const urlLink = `${window.location.origin}/r/${idParams.id}`;
     yield put({

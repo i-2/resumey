@@ -67,6 +67,7 @@ class ResumeSerializer(serializers.Serializer):
     education = EducationSerializer(required=True, many=True)
     employment = EmploymentSerializer(required=True, many=True)
     summary = SummarySerializer(required=True)
+    theme = serializers.CharField(required=True)
 
     def create(self, validated_data):
         json_response = dumps(validated_data, cls=ResponseJSONEncoder)

@@ -9,6 +9,8 @@ import { Wizard } from './Wizard';
 import { EmploymentHistory } from './EmploymentHistory';
 import { EducationHistory } from './EducationHistory';
 import { SkillDetails } from './SkillDetails';
+import { ThemeSelector } from './Selector';
+
 import * as Yup from 'yup';
 
 const UrlValidator = Yup.string()
@@ -97,6 +99,14 @@ export const _App = (props: any) => {
                             onPrevious={() => props.updateWizard(4)}
                             submitValues={(values: any) => props.updateLinks(values)}
                         />
+                    },
+                    {
+                        "title": "Select Theme", "component": <ThemeSelector
+                            onPrev={() => props.updateWizard(5)}
+                            onNext={() => props.updateWizard(7)}
+                            onChange={(e: any) => props.updateTheme(e.currentTarget.value)}
+                            value={props.theme}
+                        />
                     }
                 ]
             } count={props.count} />
@@ -112,7 +122,8 @@ const mapStateToProps = (state: any) => (
         employment: state.employment,
         education: state.education,
         skills: state.skill,
-        social: state.social
+        social: state.social,
+        theme: state.theme.theme
     })
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actionCreators, dispatch);
 

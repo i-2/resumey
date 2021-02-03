@@ -36,5 +36,6 @@
     }],
     "summary": {
         "summary": "test"
-    }
+    },
+    "theme": "plain"
 }

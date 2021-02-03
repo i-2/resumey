@@ -8,3 +8,4 @@ export * from './education';
 export * from './skills';
 export * from './social';
 export * from './publish';
+export * from './theme';
